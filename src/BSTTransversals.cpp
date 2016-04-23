@@ -37,8 +37,8 @@ void getpreorder(struct node *root, int *arr, int *index){
 	{
 		arr[*index] = root->data;
 		++*index;
-		getinorder(root->left, arr, index);
-		getinorder(root->right, arr, index);
+		getpreorder(root->left, arr, index);
+		getpreorder(root->right, arr, index);
 	}
 
 }
@@ -46,8 +46,8 @@ void getpreorder(struct node *root, int *arr, int *index){
 void getpostorder(struct node *root, int *arr, int *index){
 	if (root != NULL)
 	{
-		getinorder(root->left, arr, index);
-		getinorder(root->right, arr, index);
+		getpostorder(root->left, arr, index);
+		getpostorder(root->right, arr, index);
 		arr[*index] = root->data;
 		++*index;
 	}
