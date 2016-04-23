@@ -30,8 +30,42 @@ struct node{
 };
 
 
+int count(struct node *p)
+{
+	if (p == NULL)
+		return(0);
+	else
+		if (p->left == NULL && p->right == NULL)
+			return(1);
+		else
+			return(1 + (count(p->left) + count(p->right)));
+}
+int arr(struct node *root, int i, int array[])
+{
 
+	if (root == NULL)
+		return i;
+
+
+	array[i] = root->data;
+	i++;
+	if (root->right != NULL)
+		arr(root->right, i, array);
+	if (root->left != NULL)
+		arr(root->left, i, array);
+	
+
+
+	array[i] = root->data;
+	i++;
+}
 int* BSTRighttoLeftRows(struct node* root)
 {
+	if (root==NULL)
     return NULL;
+	int i = 0;
+	int n = count(root);
+	int *array = (int*)malloc(sizeof(int)*n);
+	arr(root, i, array);
+
 }
