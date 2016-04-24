@@ -40,39 +40,18 @@ struct node{
 	struct node *right;
 };
 
-int  height(struct node *root)
-{
-
-	int count_left = 0, count_right = 0;
-	while (root->right != NULL)
-	{
-		count_right++;
-		root = root->right;
-	}
-	while (root->left != NULL)
-	{
-		count_left++;
-		root = root->left;
-	}
-	if (count_left >= count_right)
-		return count_left;
-	else
-		return count_right;
-}
-
-
 int get_height(struct node *root){
-	if (root == NULL)
+	if (root== NULL)
 		return 0;
-	if (root->left == NULL && root->right == NULL)
-		return 1;
-	int count_left = 0, count_right = 0;
-	count_left = height(root);
-	count_right = height(root);
-	if (count_left >= count_right)
-		return count_left + 1;
 	else
-		return count_right + 1;
+	{
+
+		int lheight = get_height(root->left);
+		int rheight = get_height(root->right);
+		if (lheight > rheight)
+			return(lheight + 1);
+		else return(rheight + 1);
+	}
 
 }
 int sum(struct node *root)

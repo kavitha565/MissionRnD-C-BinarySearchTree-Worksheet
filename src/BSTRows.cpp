@@ -28,9 +28,7 @@ struct node{
 	int data;
 	struct node *right;
 };
-
-
-int count(struct node *p)
+int count1(struct node *p)
 {
 	if (p == NULL)
 		return(0);
@@ -38,28 +36,48 @@ int count(struct node *p)
 		if (p->left == NULL && p->right == NULL)
 			return(1);
 		else
-			return(1 + (count(p->left) + count(p->right)));
+			return(1 + (count1(p->left) + count1(p->right)));
 }
-void getarr(struct node *root, int *array, int *index)
+void printGivenLevel(struct node* root, int level, int *arr, int *index)
 {
 
-	if (root != NULL)
+	if (root == NULL)
+		return;
+	if (level == 1)
 	{
-		getarr(root->right, array, index);
-		array[*index] = root->data;
+		arr[*index] = root->data;
 		++*index;
-		getarr(root->left, array, index);
+	}
+	else if (level > 1)
+	{
+		printGivenLevel(root->right, level - 1, arr, index);
+		printGivenLevel(root->left, level - 1, arr, index);
+
+	}
+}
+int height1(struct node* node)
+{
+	if (node == NULL)
+		return 0;
+	else
+	{
+		
+		int lheight = height1(node->left);
+		int rheight = height1(node->right);
+		if (lheight > rheight)
+			return(lheight + 1);
+		else return(rheight + 1);
 	}
 }
 int* BSTRighttoLeftRows(struct node* root)
 {
 	if (root==NULL)
-    return NULL;
-	int n = count(root);
+	return 0;
+	int n = count1(root);
 	int *array = (int*)malloc(sizeof(int)*n);
-	int i = 0;
-	getarr(root, array, &i);
+	int h = height1(root);
+	int i, index = 0;
+	for (i = 1; i <= h; i++)
+		printGivenLevel(root, i, array, &index);
 	return array;
-	
-
 }
