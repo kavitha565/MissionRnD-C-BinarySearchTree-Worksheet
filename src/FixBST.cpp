@@ -38,7 +38,7 @@ int index = 0;// For index reference purpose for "arr".
 void inOrder(struct node *root, struct node *arr[])  // Checking the misplaced nodes by inorder traversal.
 {
 	if (root->left != NULL) 	
-		inOrder(root->left, arr);
+inOrder(root->left, arr);
 
 
 	if (prev != NULL)
@@ -67,8 +67,7 @@ void inOrder(struct node *root, struct node *arr[])  // Checking the misplaced n
 
 	prev = root;
 
-	if (root->right != NULL)	
-		inOrder(root->right, arr);
+	if (root->right != NULL)	inOrder(root->right, arr);
 }
 
 

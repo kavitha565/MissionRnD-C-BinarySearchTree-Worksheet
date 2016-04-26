@@ -38,7 +38,7 @@ int count1(struct node *p)
 		else
 			return(1 + (count1(p->left) + count1(p->right)));
 }
-void printGivenLevel(struct node* root, int level, int *arr, int *index)
+void printLevel(struct node* root, int level, int *arr, int *index)
 {
 
 	if (root == NULL)
@@ -50,8 +50,8 @@ void printGivenLevel(struct node* root, int level, int *arr, int *index)
 	}
 	else if (level > 1)
 	{
-		printGivenLevel(root->right, level - 1, arr, index);
-		printGivenLevel(root->left, level - 1, arr, index);
+		printLevel(root->right, level - 1, arr, index);
+		printLevel(root->left, level - 1, arr, index);
 
 	}
 }
@@ -78,6 +78,6 @@ int* BSTRighttoLeftRows(struct node* root)
 	int h = height1(root);
 	int i, index = 0;
 	for (i = 1; i <= h; i++)
-		printGivenLevel(root, i, array, &index);
+		printLevel(root, i, array, &index);
 	return array;
 }
